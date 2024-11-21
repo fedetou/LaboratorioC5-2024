@@ -4,17 +4,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 ## ATENCION: Debe colocar la direccion en la que ha sido publicada la aplicacion en la siguiente linea\
-# url = 'https://tp8-555555.streamlit.app/'
+# url = 'https://fedetouceda.streamlit.app'
 
 
 st.set_page_config(page_title="Ventas de Sucursales", layout="wide")
 
 def mostrar_informacion_alumno():
-    with st.container():
+    with st.container(border=True):
         st.markdown('**Legajo:** 57.543')
         st.markdown('**Nombre:** Touceda Federico')
         st.markdown('**Comisión:** C5')
-
 mostrar_informacion_alumno()
 
 
@@ -69,11 +68,10 @@ def crear_grafico_ventas(datos_producto, producto):
 
 
 st.sidebar.header("Cargar archivo de datos")
-file = st.sidebar.file_uploader("Subir archivo CSV", type=["csv"])
+cargar_archivo = st.sidebar.file_uploader("Subir archivo CSV", type=["csv"])
 
-if file is not None:
-    
-    data = pd.read_csv(file)
+if cargar_archivo is not None:
+    data = pd.read_csv(cargar_archivo)
     
     
     data = data.rename(columns={'Año': 'year', 'Mes': 'month'})
@@ -94,8 +92,7 @@ if file is not None:
     
     productos = data['Producto'].unique()
     for producto in productos:
-        with st.container():
-           
+        with st.container(border=True):
             st.subheader(f"{producto}")
             datos_producto = data[data['Producto'] == producto].copy()
             
